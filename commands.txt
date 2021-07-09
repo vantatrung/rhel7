@@ -1,0 +1,105 @@
+oc get route
+dig @172.25.250.254 mysql-openshift-developer-mysql-openshift.apps.ocp4.example.com
+mysql -uroot -pr00tpa55 mysql-openshift-developer-mysql-openshift.apps.ocp4.example.com
+mysql -uroot -pr00tpa55 mysql-openshift-developer-mysql-openshift.apps.ocp4.example.com:3306
+oc port-forward mysql-openshift-1-xrr69 3306:3306
+oc get route
+oc describe service mysql-openshift 
+oc delete project ${RHT_OCP4_DEV_USER}-mysql-openshift
+cat /usr/local/etc/ocp4.config 
+source /usr/local/etc/ocp4.config
+echo $RHT_OCP4_MASTER_API
+lab openshift-routes start
+oc login -u developer -p developer ${RHT_OCP4_MASTER_API}
+oc new-project developer-route
+oc new-app --as-deployment-config php:7.3~https://github.com/vantatrung/DO180-apps --context-dir php-helloworld --name php-helloworld
+oc get pods
+oc get pods -w
+oc logs -f bc/php-helloworld
+oc describe svc/php-helloworld
+oc delete app php-helloworld
+oc delete  php-helloworld
+oc delete svc php-helloworld
+oc get pods
+oc delete project developer-route
+oc get pods
+oc new-project ${RHT_OCP4_DEV_USER}-route
+oc projects
+oc new-app --as-deployment-config  php:7.3~https://github.com/${RHT_OCP4_GITHUB_USER}/DO180-apps  --context-dir php-helloworld --name php-helloworld
+oc get pods -w
+oc delete project developer-route
+oc get pods -w
+docker images | grep apiconnect-operator
+sudo podman images | grep apiconnect-operator
+lab openshift-routes start
+source /fa
+source /usr/local/etc/ocp4.config 
+oc login -u ${RHT_OCP4_DEV_USER} -p  ${RHT_OCP4_DEV_PASSWORD} ${RHT_OCP4_MASTER_API}
+oc new-project ${RHT_OCP4_DEV_USER}-route
+oc new-app --as-deployment-config  php:7.3~https://github.com/${RHT_OCP4_GITHUB_USER}/DO180-apps \
+oc new-app --as-deployment-config  php:7.3~https://github.com/${RHT_OCP4_GITHUB_USER}/DO180-apps  --context-dir php-helloworld --name php-helloworld
+oc get pods -w
+ping 8.8.8.8
+oc describe is php -n openshift
+sudo podman pull registry.redhat.io/rhscl/php-73-rhel7
+sudo podman login registry.redhat.io
+sudo podman pull registry.redhat.io/rhscl/php-73-rhel7
+oc get pods
+ oc log php-helloworld-1-build
+ oc logs php-helloworld-1-build
+oc get events --sort-by='{.metadata.creationTimestamp}'
+oc edit pod php-helloworld-1-build 
+sudo podman login quay.io
+sudo podman pull quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:57b9c1fb0b0c24603f0ef10f57cf4435a09b45fe3f3b561e2fa6924da0491d27
+oc start-build php-helloworld 
+oc get pods
+oc get builds
+oc cancel-build php-helloworld 
+oc cancel-build php-helloworld-1
+oc get builds
+oc get pods
+oc projects
+oc create deployment test --image=quay.io/bkthong/webserver-hello:1.1
+oc get pods
+oc get pods -w
+oc get pods
+oc delete all --all
+oc new-app --as-deployment-config  php:7.3~https://github.com/${RHT_OCP4_GITHUB_USER}/DO180-apps  --context-dir php-helloworld --name php-helloworld
+oc get pods
+oc get events -w
+oc get secrets
+oc new-project proj88
+oc new-app --as-deployment-config  php:7.3~https://github.com/${RHT_OCP4_GITHUB_USER}/DO180-apps  --context-dir php-helloworld --name php-helloworld
+oc get events -w
+oc get pods
+vim pull-secret.txt
+mv pull-secret.txt pull-secret.json
+oc create secret generic registrycreds --from-file .dockerconfigjson=pull-secret.json --type kubernetes.io/dockerconfigjson
+oc describe sa builder
+oc secrets link builder test --for=pull,mount
+oc secrets link builder registrycreds --for=pull,mount
+oc secrets link builder test --for=pull,mount
+oc describe sa builder
+oc get pods
+oc delete all --all
+oc new-app --as-deployment-config  php:7.3~https://github.com/${RHT_OCP4_GITHUB_USER}/DO180-apps  --context-dir php-helloworld --name php-helloworld
+oc get pods -w
+oc get pods
+oc project
+oc project developer-route 
+oc create secret generic registrycreds --from-file .dockerconfigjson=pull-secret.json --type kubernetes.io/dockerconfigjson
+oc secrets link builder registrycreds --for=pull,mount
+oc describe sa builder
+oc get pods
+ls
+vim create-secret.sh
+history | tail
+history |tail -30
+history |tail -30 |cut -c 8-
+history |tail -50 |cut -c 8-
+history |tail -100 |cut -c 8- > /tmp/commands.txt
+#####
+
+cat /tmp/commands.txt
+cat pull-secret.json
+{"auths":{"cloud.openshift.com":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K2JrdGhvbmcxa2RlYnBqeG16MXFodm14cGdwamVncXp6Zzc6SEVWSEpMNUtMTk45RVIyS0pZTjFDQzZRRUhYNFQ0M1lDRUlXQTlLNTVFQkZPWkRKU0lYUkg3STdKR0QxQ09BMg==","email":"bthong@redhat.com"},"quay.io":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K2JrdGhvbmcxa2RlYnBqeG16MXFodm14cGdwamVncXp6Zzc6SEVWSEpMNUtMTk45RVIyS0pZTjFDQzZRRUhYNFQ0M1lDRUlXQTlLNTVFQkZPWkRKU0lYUkg3STdKR0QxQ09BMg==","email":"bthong@redhat.com"},"registry.connect.redhat.com":{"auth":"NTIxNTM5M3x1aGMtMUtEZUJQSnhNejFxaHZtWFBnUEpFZ1Faekc3OmV5SmhiR2NpT2lKU1V6VXhNaUo5LmV5SnpkV0lpT2lKaE5EYzJZak5pWTJGa09UUTBNak01WVRSaU1HTTBNMlUyTWpNeE5tWTRNQ0o5LkpXMTBIaGFPRTdCcWNzSE9aN09VWG9TdFRpcmNzZ3ktZjZQTEtFeFBTNnBlcXhvTVl4X01aX3VSOTF5Wi01OUdCVlgydmM2VjQwS0E3OHdvM1FmOG1kLUFFMzRSSUJwVUJuWS1PNTZzWkEtVE9mX1pMSmdDcXkxYmlkSjdWR1BDNTBPVFduY1FwSExNM0c0WXBIQl94RzQ5S2pPSHo5UjRuX0J3bUpoZ3YwaFVIbXlaODUzVUFlLUs3MmhFRjVoV2JCVFBDY09LV25hY2NCRjlsNWJZZGpha2J5U1ZVcEtxdEpwM0tpOF9Dcy1ZdkRVTFRCdGxEbEJHekdmT3hQaFp5ZVA4Ty1YZHVHcGh6Ri1QTllmR1F6Y29wVzRFQU9IQURaamg0QTFoVzRFNUlwTFZjVDl5SWVHNzF0WWFhZDVDYWxBMlc2Vl9kYmFEaG4wVmwta19yRWxxbGhUcUJKdXJRVGdLMkRwVjdXZlpCSEdpLWtDa1ZCZ3dCNEJtUFB1RjVKbm40djNpaUx3d2hGV25YdXV5VHNCYnJYRnIxLTdIQ3g2Y00tWFM5bW5NM1RTSWVSeWp4WHU5NDJkUlRHcm1mcnRoWDBrOG9fVVgxQ3REQkhmYjJoQm8yMGtaSGtmekdsTlpnYW9INl9wTUJISDRuR2RSWjVXVnJHaEg4ZGFFUjFGVTVMblBoeUhSS2VZNm5HRk55SUpkaFNuZmVZNmlhaVdtMndTZ2JwTklHbW9DMVNMd005UVI2QTVvcXRORnFOUTRxMkVKZTN1Zk5RQXlscFhnMzd5ZlZkbk9MUlpfaXdqUVAyVk5GdjV6d3gyOGtRM3FjU0VxbDc0TlphQlVSZ2t4WkxSNk9BdEFGdHp6b1pNbkFRUnZMUzlRVUZNcDdVWXF5SXJETWFN","email":"bthong@redhat.com"},"registry.redhat.io":{"auth":"NTIxNTM5M3x1aGMtMUtEZUJQSnhNejFxaHZtWFBnUEpFZ1Faekc3OmV5SmhiR2NpT2lKU1V6VXhNaUo5LmV5SnpkV0lpT2lKaE5EYzJZak5pWTJGa09UUTBNak01WVRSaU1HTTBNMlUyTWpNeE5tWTRNQ0o5LkpXMTBIaGFPRTdCcWNzSE9aN09VWG9TdFRpcmNzZ3ktZjZQTEtFeFBTNnBlcXhvTVl4X01aX3VSOTF5Wi01OUdCVlgydmM2VjQwS0E3OHdvM1FmOG1kLUFFMzRSSUJwVUJuWS1PNTZzWkEtVE9mX1pMSmdDcXkxYmlkSjdWR1BDNTBPVFduY1FwSExNM0c0WXBIQl94RzQ5S2pPSHo5UjRuX0J3bUpoZ3YwaFVIbXlaODUzVUFlLUs3MmhFRjVoV2JCVFBDY09LV25hY2NCRjlsNWJZZGpha2J5U1ZVcEtxdEpwM0tpOF9Dcy1ZdkRVTFRCdGxEbEJHekdmT3hQaFp5ZVA4Ty1YZHVHcGh6Ri1QTllmR1F6Y29wVzRFQU9IQURaamg0QTFoVzRFNUlwTFZjVDl5SWVHNzF0WWFhZDVDYWxBMlc2Vl9kYmFEaG4wVmwta19yRWxxbGhUcUJKdXJRVGdLMkRwVjdXZlpCSEdpLWtDa1ZCZ3dCNEJtUFB1RjVKbm40djNpaUx3d2hGV25YdXV5VHNCYnJYRnIxLTdIQ3g2Y00tWFM5bW5NM1RTSWVSeWp4WHU5NDJkUlRHcm1mcnRoWDBrOG9fVVgxQ3REQkhmYjJoQm8yMGtaSGtmekdsTlpnYW9INl9wTUJISDRuR2RSWjVXVnJHaEg4ZGFFUjFGVTVMblBoeUhSS2VZNm5HRk55SUpkaFNuZmVZNmlhaVdtMndTZ2JwTklHbW9DMVNMd005UVI2QTVvcXRORnFOUTRxMkVKZTN1Zk5RQXlscFhnMzd5ZlZkbk9MUlpfaXdqUVAyVk5GdjV6d3gyOGtRM3FjU0VxbDc0TlphQlVSZ2t4WkxSNk9BdEFGdHp6b1pNbkFRUnZMUzlRVUZNcDdVWXF5SXJETWFN","email":"bthong@redhat.com"}}}
